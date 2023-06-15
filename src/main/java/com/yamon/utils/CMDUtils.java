@@ -23,6 +23,8 @@ public class CMDUtils {
             sb.append(cmd).append(" & ");
         }
         String commands = sb.toString();
+        commands = commands.substring(0, commands.length() - 2);
+        System.out.println("开始执行指令" + commands);
         process = Runtime.getRuntime().exec(commands);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line = null;
@@ -30,6 +32,7 @@ public class CMDUtils {
             System.out.println(new String(line.getBytes(), StandardCharsets.UTF_8));
         }
         process.destroy();
+        System.out.println("指令执行结束...");
     }
 
     public static String getOsCmd() {
