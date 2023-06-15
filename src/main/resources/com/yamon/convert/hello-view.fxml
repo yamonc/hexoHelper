@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.lang.String?>
+<VBox alignment="CENTER" prefHeight="541.0" prefWidth="832.0" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yamon.convert.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <children>
+            <Label text="Hexo文章转换器">
+                <font>
+                    <Font size="28.0" />
+                </font>
+            </Label>
+        <FlowPane prefHeight="412.0" prefWidth="782.0">
+            <children>
+                <Pane prefHeight="34.0" prefWidth="640.0" />
+                <Pane prefHeight="205.0" prefWidth="780.0">
+                    <children>
+                        <TextArea editable="false" layoutX="7.0" layoutY="6.0" prefHeight="152.0" prefWidth="771.0" text="使用说明：&#10;1. 点击&lt;上传文件&gt;按钮，上传&lt;待转换&gt;的文件。&#10;2. 按照下方的指示，输入&lt;标签&gt;、&lt;分类&gt;等一些必要的信息。&#10;3. 转换格式、部署、一键部署的区别：&#10;    a. &lt;转换格式&gt;：基于当前文件转换成为Hexo可识别的文件。&#10;    b. &lt;部署&gt;：按顺序执行hexo clean、hexo g、hexo d指令。&#10;    c. &lt;一键部署&gt;: &lt;转换格式&gt;和&lt;部署&gt;的结合体，可以一键完成转格式+push的操作" wrapText="true">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </TextArea>
+                        <Label fx:id="fileInfo" layoutX="55.0" layoutY="169.0" style="-fx-font-style: red;" text="文件未上传！" />
+                    </children>
+                </Pane>
+              <Pane prefHeight="166.0" prefWidth="792.0">
+                  <children>
+                      <ToolBar layoutX="264.0" layoutY="103.0" prefHeight="40.0" prefWidth="264.0">
+                          <items>
+                              <Button fx:id="fxUpload" mnemonicParsing="false" onAction="#upload" text="上传文件" />
+                              <Button fx:id="fxConvert" mnemonicParsing="false" onAction="#convert" text="转换格式" />
+                              <Button fx:id="push" mnemonicParsing="false" onAction="#push" text="部署" />
+                        <Button fx:id="fxConvertAndPush" mnemonicParsing="false" onAction="#convertAndPush" text="一键部署" />
+                          </items>
+                      </ToolBar>
+                      <Label layoutX="165.0" layoutY="18.0" text="标签:" />
+                      <TextField fx:id="tag" layoutX="205.0" layoutY="14.0" />
+                      <Label layoutX="399.0" layoutY="18.0" text="分类：" />
+                      <TextField fx:id="categories" layoutX="443.0" layoutY="14.0" />
+                      <Label fx:id="recommend" layoutX="163.0" layoutY="59.0" text="是否推荐：" />
+                      <Label layoutX="402.0" layoutY="59.0" text="位置：" />
+                      <TextField fx:id="locate" layoutX="443.0" layoutY="55.0" />
+                      <ComboBox fx:id="isRecommend" layoutX="223.0" layoutY="55.0" prefWidth="150.0" promptText="请选择...">
+                          <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="是" />
+                                  <String fx:value="否" />
+                              </FXCollections>
+                          </items>
+                      </ComboBox>
+                  </children>
+              </Pane>
+            </children>
+        </FlowPane>
+    </children>
+</VBox>
