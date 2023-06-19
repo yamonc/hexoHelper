@@ -1,0 +1,48 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="convert">
+    <output-path>$PROJECT_DIR$/out/artifacts/convert</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="com.yamon.convert.HelloApplication" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="all" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="convert.jar">
+        <element id="module-output" name="convert" />
+      </element>
+      <element id="library" level="project" name="Maven: com.dlsc.formsfx:formsfx-core:11.5.0" />
+      <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.1" />
+      <element id="library" level="project" name="Maven: eu.hansolo.fx:countries:17.0.22" />
+      <element id="library" level="project" name="Maven: eu.hansolo.fx:heatmap:17.0.9" />
+      <element id="library" level="project" name="Maven: eu.hansolo:tilesfx:17.1.15" />
+      <element id="library" level="project" name="Maven: eu.hansolo:toolbox:17.0.22" />
+      <element id="library" level="project" name="Maven: eu.hansolo:toolboxfx:17.0.28" />
+      <element id="library" level="project" name="Maven: org.controlsfx:controlsfx:11.1.2" />
+      <element id="library" level="project" name="Maven: org.kordamp.ikonli:ikonli-core:12.3.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:win:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:win:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-media:win:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:win:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:17.0.2" />
+      <element id="library" level="project" name="Maven: org.kordamp.ikonli:ikonli-javafx:12.3.1" />
+      <element id="library" level="project" name="Maven: org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0" />
+      <element id="library" level="project" name="Maven: net.synedra:validatorfx:0.4.0" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:win:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-media:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-swing:win:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-swing:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-web:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-web:win:17.0.2" />
+      <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.26" />
+    </root>
+  </artifact>
+</component>

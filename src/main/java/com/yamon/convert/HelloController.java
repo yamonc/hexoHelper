@@ -10,6 +10,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.chrono.IsoChronology;
 import java.time.format.DateTimeFormatter;
@@ -94,7 +95,7 @@ public class HelloController {
     }
 
     @FXML
-    public void push(){
+    public void push() {
         this.executeCMD();
         AlertUtils.infoAlert("指令执行完成,部署成功.");
     }
@@ -141,7 +142,7 @@ public class HelloController {
         sb.append(sp).append("\n");
         try {
             // 读取原始 Markdown 文件内容
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8));
             StringBuilder originalContent = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -151,7 +152,7 @@ public class HelloController {
             // 构造要添加的新内容
             String combinedContent = sb.toString() + originalContent;
             // 写入合并后的内容到原始文件
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8));
             writer.write(combinedContent);
             writer.close();
             System.out.println("文件写入完成。");

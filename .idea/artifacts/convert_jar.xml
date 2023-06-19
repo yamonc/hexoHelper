@@ -1,0 +1,35 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="convert:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/convert_jar</output-path>
+    <root id="archive" name="convert.jar">
+      <element id="module-output" name="convert" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-fxml/17.0.2/javafx-fxml-17.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/eu/hansolo/fx/countries/17.0.22/countries-17.0.22.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/commons-lang/commons-lang/2.1/commons-lang-2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/eu/hansolo/toolboxfx/17.0.28/toolboxfx-17.0.28.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-base/17.0.2/javafx-base-17.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-controls/17.0.2/javafx-controls-17.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-base/17.0.2/javafx-base-17.0.2-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-swing/17.0.2/javafx-swing-17.0.2-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/kordamp/bootstrapfx/bootstrapfx-core/0.4.0/bootstrapfx-core-0.4.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-media/17.0.2/javafx-media-17.0.2-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/com/dlsc/formsfx/formsfx-core/11.5.0/formsfx-core-11.5.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/kordamp/ikonli/ikonli-javafx/12.3.1/ikonli-javafx-12.3.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-web/17.0.2/javafx-web-17.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-controls/17.0.2/javafx-controls-17.0.2-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-media/17.0.2/javafx-media-17.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-graphics/17.0.2/javafx-graphics-17.0.2-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-graphics/17.0.2/javafx-graphics-17.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/eu/hansolo/toolbox/17.0.22/toolbox-17.0.22.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/eu/hansolo/tilesfx/17.1.15/tilesfx-17.1.15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-swing/17.0.2/javafx-swing-17.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/controlsfx/controlsfx/11.1.2/controlsfx-11.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-web/17.0.2/javafx-web-17.0.2-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/eu/hansolo/fx/heatmap/17.0.9/heatmap-17.0.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/net/synedra/validatorfx/0.4.0/validatorfx-0.4.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/openjfx/javafx-fxml/17.0.2/javafx-fxml-17.0.2-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../self_maven/repository/org/kordamp/ikonli/ikonli-core/12.3.1/ikonli-core-12.3.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
