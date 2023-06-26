@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yamon.convert.MainController">
   <tabs>
@@ -32,7 +32,7 @@
                                     <Label layoutX="29.0" layoutY="104.0" text="已选择标签：" />
                                     <Label fx:id="tagShow" layoutX="101.0" layoutY="104.0" text="--" />
                                     <Label layoutX="489.0" layoutY="97.0" text="已选择专栏：" />
-                                    <Label fx:id="titleShow" layoutX="430.0" layoutY="55.0" text="--" />
+                                    <Label fx:id="titleShow" layoutX="430.0" layoutY="55.0" />
                                     <Label layoutX="386.0" layoutY="55.0" text="标题：" />
                                     <Label layoutX="690.0" layoutY="55.0" text="可评论：" />
                                     <Label layoutX="828.0" layoutY="55.0" text="推荐：" />
@@ -47,8 +47,8 @@
                                     <Label fx:id="commentShow" layoutX="738.0" layoutY="55.0" text="--" />
                                     <Label fx:id="recommendShow" layoutX="864.0" layoutY="55.0" text="--" />
                                     <Label fx:id="categoriesShow" layoutX="565.0" layoutY="97.0" text="--" />
-                                    <Label fx:id="keywordShow" layoutX="742.0" layoutY="151.0" text="--" />
-                                    <Label fx:id="coverShow" layoutX="98.0" layoutY="151.0" text="--" />
+                                    <Label fx:id="keywordShow" layoutX="742.0" layoutY="151.0" />
+                                    <Label fx:id="coverShow" layoutX="98.0" layoutY="151.0" />
                                     <Label fx:id="locateShow" layoutX="544.0" layoutY="151.0" text="--" />
                                     <Separator layoutX="-18.0" layoutY="179.0" prefHeight="25.0" prefWidth="983.0" />
                                  </children>
@@ -80,7 +80,6 @@
                                     <ComboBox fx:id="tagSelect" layoutX="121.0" layoutY="91.0" onShown="#getAllTags" prefHeight="23.0" prefWidth="162.0" promptText="请选择..." />
                                     <Label layoutX="87.0" layoutY="26.0" text="标题：" />
                                     <TextField fx:id="title" layoutX="123.0" layoutY="22.0" />
-                                    <Button layoutX="298.0" layoutY="22.0" mnemonicParsing="false" onAction="#generateTitle" text="自动生成" />
                                     <Label fx:id="recommend1" layoutX="544.0" layoutY="26.0" text="文章缩略图（可选）：" />
                                     <TextField fx:id="coverText" layoutX="673.0" layoutY="22.0" />
                                     <Label fx:id="recommend2" layoutX="592.0" layoutY="59.0" text="是否可评论：" />
@@ -129,7 +128,7 @@
                         <Label layoutX="73.0" layoutY="113.0" prefHeight="24.0" prefWidth="62.0" text="工作目录：" />
                         <Label layoutX="48.0" layoutY="173.0" prefHeight="24.0" prefWidth="87.0" text="上传文件目录：" />
                         <Separator layoutX="15.0" layoutY="79.0" prefHeight="25.0" prefWidth="983.0" />
-                        <TextArea editable="false" layoutX="75.0" layoutY="7.0" prefHeight="62.0" prefWidth="863.0" text="说明：&#10;工作目录：当前hexo安装的目录，通常该目录下有public、theme等目录；&#10;上传文件目录：需要转换markdown文件的所在目录。" />
+                        <TextArea editable="false" layoutX="75.0" layoutY="7.0" prefHeight="75.0" prefWidth="906.0" text="说明：&#10;！！！工作目录如果使用部署、一键部署功能，需要提供工作目录；上传文件目录可以不提供；&#10;工作目录：执行Hexo等一系列指令的位置，指令包括hexo clean、hexo g、hexo d；一般为当前hexo部署本地的目录，通常该目录下有public、theme等目录；&#10;上传文件目录：通常为文章的所在位置，主要用来在上传博客文章的时候，可以一键定位到博客的文件夹（一般是_posts)，可不设置。" />
                         <TextField fx:id="workPath" layoutX="135.0" layoutY="114.0" promptText="请输入Hexo安装的目录" />
                         <TextField fx:id="uploadPath" layoutX="135.0" layoutY="174.0" promptText="请输入待转换文件的目录" />
                         <Button layoutX="256.0" layoutY="234.0" mnemonicParsing="false" onAction="#saveSetting" text="保存" />
