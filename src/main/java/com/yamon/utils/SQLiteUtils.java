@@ -15,10 +15,15 @@ import java.util.Objects;
 public class SQLiteUtils {
 
 //    public static final String USER_DIRECTORY = System.getProperty("user.dir");
-    public static final String USER_DIRECTORY = Objects.requireNonNull(SQLiteUtils.class.getResource("")).getPath();
+    public static final String USER_DIRECTORY = Objects.requireNonNull(SQLiteUtils.class.getResource("/db")).getPath();
     private static final String CLASS_NAME = "org.sqlite.JDBC";
 //    private static final String DB_URL = "jdbc:sqlite:" + "D:\\sugon\\code_java\\code\\convert\\src\\main\\resources\\db\\hexoHelper.db";
-    private static final String DB_URL = "jdbc:sqlite:db/hexoHelper.db";
+
+//  打包环境
+//    private static final String DB_URL = "jdbc:sqlite:db/hexoHelper.db";
+
+    // dev环境
+    private static final String DB_URL = "jdbc:sqlite:"+ USER_DIRECTORY +"hexoHelper.db";
 
     //    private static final String CREATE_SQL = "CREATE TABLE IF NOT EXISTS tags(id int not null primary key," +
 //            "name varchar(20) not null,sex char(2) not null,age int not null," +
