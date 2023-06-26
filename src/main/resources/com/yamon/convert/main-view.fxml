@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yamon.convert.MainController">
+  <tabs>
+    <Tab text="Hexo转换器">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="570.0" prefWidth="1000.0" spacing="20.0">
+                     <children>
+                        <Label text="Hexo文章转换器">
+                           <font>
+                              <Font size="34.0" />
+                           </font>
+                        </Label>
+                        <FlowPane prefHeight="412.0" prefWidth="782.0">
+                           <children>
+                              <Pane prefHeight="191.0" prefWidth="959.0">
+                                 <children>
+                                    <Label fx:id="fileInfo" layoutX="93.0" layoutY="55.0" style="-fx-font-style: red;" text="--" />
+                                    <Label layoutX="41.0" layoutY="55.0" text="文件名：" />
+                                    <Label layoutX="29.0" layoutY="104.0" text="已选择标签：" />
+                                    <Label fx:id="tagShow" layoutX="101.0" layoutY="104.0" text="--" />
+                                    <Label layoutX="489.0" layoutY="97.0" text="已选择专栏：" />
+                                    <Label fx:id="titleShow" layoutX="430.0" layoutY="55.0" text="--" />
+                                    <Label layoutX="386.0" layoutY="55.0" text="标题：" />
+                                    <Label layoutX="690.0" layoutY="55.0" text="可评论：" />
+                                    <Label layoutX="828.0" layoutY="55.0" text="推荐：" />
+                                    <Label layoutX="695.0" layoutY="151.0" text="关键字：" />
+                                    <Label layoutX="29.0" layoutY="151.0" text="文章缩略图：" />
+                                    <Label layoutX="489.0" layoutY="151.0" text="已选位置：" />
+                                    <Label layoutX="15.0" layoutY="13.0" text="Front-Matter清单：" textFill="#a14646">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="commentShow" layoutX="738.0" layoutY="55.0" text="--" />
+                                    <Label fx:id="recommendShow" layoutX="864.0" layoutY="55.0" text="--" />
+                                    <Label fx:id="categoriesShow" layoutX="565.0" layoutY="97.0" text="--" />
+                                    <Label fx:id="keywordShow" layoutX="742.0" layoutY="151.0" text="--" />
+                                    <Label fx:id="coverShow" layoutX="98.0" layoutY="151.0" text="--" />
+                                    <Label fx:id="locateShow" layoutX="544.0" layoutY="151.0" text="--" />
+                                    <Separator layoutX="-18.0" layoutY="179.0" prefHeight="25.0" prefWidth="983.0" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="234.0" prefWidth="959.0">
+                                 <children>
+                                    <ToolBar layoutX="370.0" layoutY="180.0" prefHeight="40.0" prefWidth="264.0">
+                                       <items>
+                                          <Button fx:id="fxUpload" mnemonicParsing="false" onAction="#upload" text="上传文件" />
+                                          <Button fx:id="fxConvert" mnemonicParsing="false" onAction="#convert" text="转换格式" />
+                                          <Button fx:id="push" mnemonicParsing="false" onAction="#push" text="部署" />
+                                          <Button fx:id="fxConvertAndPush" mnemonicParsing="false" onAction="#convertAndPush" text="一键部署" />
+                                       </items>
+                                    </ToolBar>
+                                    <Label layoutX="83.0" layoutY="95.0" text="标签:" />
+                                    <Label layoutX="628.0" layoutY="95.0" prefHeight="0.0" prefWidth="36.0" text="分类：" />
+                                    <Label fx:id="recommend" layoutX="62.0" layoutY="59.0" text="是否推荐：" />
+                                    <Label layoutX="78.0" layoutY="129.0" text="位置：" />
+                                    <ComboBox fx:id="isRecommend" layoutX="122.0" layoutY="55.0" prefHeight="23.0" prefWidth="163.0" promptText="请选择...">
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="是" />
+                                             <String fx:value="否" />
+                                          </FXCollections>
+                                       </items>
+                                    </ComboBox>
+                                    <Button fx:id="btnSubmitTag" layoutX="300.0" layoutY="91.0" mnemonicParsing="false" onAction="#submitTag" text="确定" />
+                                    <Button fx:id="btnSubmitCategory" layoutX="845.0" layoutY="91.0" mnemonicParsing="false" onAction="#submitCategory" text="确定" />
+                                    <ComboBox fx:id="tagSelect" layoutX="121.0" layoutY="91.0" onShown="#getAllTags" prefHeight="23.0" prefWidth="162.0" promptText="请选择..." />
+                                    <Label layoutX="87.0" layoutY="26.0" text="标题：" />
+                                    <TextField fx:id="title" layoutX="123.0" layoutY="22.0" />
+                                    <Button layoutX="298.0" layoutY="22.0" mnemonicParsing="false" onAction="#generateTitle" text="自动生成" />
+                                    <Label fx:id="recommend1" layoutX="544.0" layoutY="26.0" text="文章缩略图（可选）：" />
+                                    <TextField fx:id="coverText" layoutX="673.0" layoutY="22.0" />
+                                    <Label fx:id="recommend2" layoutX="592.0" layoutY="59.0" text="是否可评论：" />
+                                    <ComboBox fx:id="isComment" layoutX="672.0" layoutY="55.0" prefHeight="23.0" prefWidth="163.0" promptText="请选择...">
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="是" />
+                                             <String fx:value="否" />
+                                          </FXCollections>
+                                       </items>
+                                    </ComboBox>
+                                    <Label layoutX="570.0" layoutY="130.0" text="关键字（可选）：" />
+                                    <TextField fx:id="keyword" layoutX="673.0" layoutY="126.0" />
+                                    <ComboBox fx:id="locateSelect" layoutX="121.0" layoutY="125.0" onShown="#getAllLocates" prefHeight="23.0" prefWidth="162.0" promptText="请选择..." />
+                                    <Button fx:id="addLocate" layoutX="350.0" layoutY="125.0" mnemonicParsing="false" onAction="#addOneLocate" text="添加" />
+                                    <Button fx:id="addTags" layoutX="350.0" layoutY="91.0" mnemonicParsing="false" onAction="#addOneTag" text="添加" />
+                                    <Button fx:id="addCategories" layoutX="896.0" layoutY="91.0" mnemonicParsing="false" onAction="#addOneCategory" text="添加" />
+                                    <ComboBox fx:id="categorySelect" layoutX="673.0" layoutY="91.0" onShown="#getAllCategories" prefHeight="23.0" prefWidth="162.0" promptText="请选择..." />
+                                    <Button fx:id="btnSubmitLocate" layoutX="300.0" layoutY="126.0" mnemonicParsing="false" onAction="#submitLocate" text="确定" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </FlowPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="设置">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="55.0" prefWidth="1000.0">
+                     <children>
+                        <Label layoutX="430.0" layoutY="20.0" text="设置内容">
+                           <font>
+                              <Font size="28.0" />
+                           </font></Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutY="55.0" prefHeight="514.0" prefWidth="1000.0">
+                     <children>
+                        <Label layoutX="73.0" layoutY="113.0" prefHeight="24.0" prefWidth="62.0" text="工作目录：" />
+                        <Label layoutX="48.0" layoutY="173.0" prefHeight="24.0" prefWidth="87.0" text="上传文件目录：" />
+                        <Separator layoutX="15.0" layoutY="79.0" prefHeight="25.0" prefWidth="983.0" />
+                        <TextArea editable="false" layoutX="75.0" layoutY="7.0" prefHeight="62.0" prefWidth="863.0" text="说明：&#10;工作目录：当前hexo安装的目录，通常该目录下有public、theme等目录；&#10;上传文件目录：需要转换markdown文件的所在目录。" />
+                        <TextField fx:id="workPath" layoutX="135.0" layoutY="114.0" promptText="请输入Hexo安装的目录" />
+                        <TextField fx:id="uploadPath" layoutX="135.0" layoutY="174.0" promptText="请输入待转换文件的目录" />
+                        <Button layoutX="256.0" layoutY="234.0" mnemonicParsing="false" onAction="#saveSetting" text="保存" />
+                     </children>
+                  </Pane>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="关于Hexo转换器">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="55.0" prefWidth="906.0">
+                     <children>
+                        <FlowPane prefHeight="538.0" prefWidth="906.0">
+                           <children>
+                              <Pane prefHeight="205.0" prefWidth="865.0">
+                                 <children>
+                                    <Label layoutX="337.0" layoutY="14.0" text="Hexo文章转换器">
+                                       <font>
+                                          <Font size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextArea editable="false" layoutX="27.0" layoutY="60.0" prefHeight="358.0" prefWidth="873.0" text="1. 解决了什么问题？&#10;使用Hexo写文章的时候，如果想将文章发布在hexo平台，需要在每篇文章的开头添加Front-Matter的格式信息，以便Hexo前端识别并展示。使用该工具可在每篇文章的开头添加Front-Matter信息，并支持自动化部署到各平台的Page上。&#10;2. 如何使用？&#10;        a. 点击&lt;上传文件&gt;按钮，上传&lt;待转换&gt;的文件。&#10;        b. 按照下方的指示，输入&lt;标签&gt;、&lt;分类&gt;等一些必要的信息。&#10;        c. 转换格式、部署、一键部署的区别：&#10;                i. &lt;转换格式&gt;：基于当前文件转换成为Hexo可识别的文件。&#10;                ii. &lt;部署&gt;：按顺序执行hexo clean、hexo g、hexo d指令。&#10;                iii. &lt;一键部署&gt;: &lt;转换格式&gt;和&lt;部署&gt;的结合体，可以一键完成转格式+push的操作&#10;3. 关于作者&#10;        欢迎访问&#10;        a. 博客网站：&#10;        b. Github网站：&#10;" wrapText="true">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </TextArea>
+                                    <Hyperlink layoutX="160.0" layoutY="301.0" text="https://yamonc.github.io">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                    <Hyperlink layoutX="181.0" layoutY="321.0" text="https://github.com/yamonc">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>

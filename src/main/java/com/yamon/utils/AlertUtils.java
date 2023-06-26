@@ -17,6 +17,14 @@ public class AlertUtils {
         alert.showAndWait();
     }
 
+    public static void successAlert(String content) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("提示信息");
+        alert.setHeaderText("执行成功:");
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
     public static void infoAlert(String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("提示信息");
