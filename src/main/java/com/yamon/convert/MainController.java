@@ -96,7 +96,7 @@ public class MainController {
             throw new RuntimeException(e);
         }
         if (!Objects.isNull(uploadPath)) {
-            this.workPath.setText(uploadPath);
+            this.uploadPath.setText(uploadPath);
         }
         if (!Objects.isNull(wordPath)) {
             this.workPath.setText(wordPath);
