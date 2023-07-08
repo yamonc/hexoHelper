@@ -2,12 +2,21 @@ package com.yamon.convert;
 
 import com.yamon.convert.dto.FrontMatterEntity;
 import com.yamon.convert.dto.PropertiesEntity;
+import com.yamon.entity.CategoryEntity;
+import com.yamon.entity.TagEntity;
+import com.yamon.service.CategoryService;
 import com.yamon.service.DaoService;
 import com.yamon.service.MainService;
+import com.yamon.service.TagService;
+import com.yamon.service.impl.CategoryServiceImpl;
 import com.yamon.service.impl.DaoServiceImpl;
 import com.yamon.service.impl.MainServiceImpl;
+import com.yamon.service.impl.TagServiceImpl;
 import com.yamon.utils.AlertUtils;
 import com.yamon.utils.CMDUtils;
+import com.yamon.vo.CategoryTableVO;
+import com.yamon.vo.TagTableVO;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -15,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -32,13 +42,22 @@ import java.util.logging.Logger;
  */
 public class MainController {
 
+    public TableView<TagTableVO> tagTableId;
+    public TableColumn<TagTableVO, String> tagId;
+    public TableColumn<TagTableVO, String> tagName;
+    public TableColumn<TagTableVO, String> tagCreateTime;
+    public TableColumn<TagTableVO, String> tagOperate;
+    public TableView<CategoryTableVO> categoryTableId;
+    public TableColumn<CategoryTableVO, String> categoryId;
+    public TableColumn<CategoryTableVO, String> categoryName;
+    public TableColumn<CategoryTableVO, String> categoryCreateTime;
+    public TableColumn<CategoryTableVO, String> categoryOperate;
     Logger logger = Logger.getLogger("mainController");
 
-    private static final String CREATE_TAG_SQL = "CREATE TABLE IF NOT EXISTS tags(id int not null primary key, name varchar(20) not null)";
-    private static final String CREATE_CATEGORY_SQL = "CREATE TABLE IF NOT EXISTS categories (id int not null primary key, name varchar(20) not null)";
-    private static final String CREATE_LOCATE_SQL = "CREATE TABLE IF NOT EXISTS locates (id int not null primary key, name varchar(20) not null)";
-
-    public static final String CREATE_PROPERTIES_SQL = "CREATE TABLE IF NOT EXISTS properties (item varchar(20) not null, content varchar(255) not null)";
+    private static final String CREATE_TAG_SQL = "CREATE TABLE IF NOT EXISTS tags(id int not null primary key, name varchar(20) not null, create_time varchar(32) not null)";
+    private static final String CREATE_CATEGORY_SQL = "CREATE TABLE IF NOT EXISTS categories (id int not null primary key, name varchar(20) not null, create_time varchar(32) not null)";
+    private static final String CREATE_LOCATE_SQL = "CREATE TABLE IF NOT EXISTS locates (id int not null primary key, name varchar(20) not null, create_time varchar(32) not null)";
+    public static final String CREATE_PROPERTIES_SQL = "CREATE TABLE IF NOT EXISTS properties (item varchar(20) not null, content varchar(255) not null, create_time varchar(32) not null)";
 
     public Button fxUpload;
     public Label fileInfo;
@@ -75,6 +94,10 @@ public class MainController {
     private DaoService daoService = new DaoServiceImpl();
 
     private MainService mainService = new MainServiceImpl();
+
+    private TagService tagService = new TagServiceImpl();
+
+    private CategoryService categoryService = new CategoryServiceImpl();
 
     public void initialize() {
         logger.info("执行初始化工作");
@@ -194,16 +217,12 @@ public class MainController {
         Optional<String> result = dialog.showAndWait();
         // The Java 8 way to get the response value (with lambda expression).
         result.ifPresent(name -> {
-            try {
-                int insert = daoService.insert("tags", UUID.randomUUID().toString(), name);
-                if (insert == 1) {
-                    // 新增成功
-                    AlertUtils.successAlert("添加成功");
-                } else {
-                    AlertUtils.errorAlert("添加失败");
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+            boolean flag = tagService.saveOneTag(UUID.randomUUID(), name);
+            if (flag) {
+                // 新增成功
+                AlertUtils.successAlert("添加成功");
+            } else {
+                AlertUtils.errorAlert("添加失败");
             }
         });
     }
@@ -220,16 +239,12 @@ public class MainController {
         Optional<String> result = dialog.showAndWait();
         // The Java 8 way to get the response value (with lambda expression).
         result.ifPresent(name -> {
-            try {
-                int insert = daoService.insert("categories", UUID.randomUUID().toString(), name);
-                if (insert == 1) {
-                    // 新增成功
-                    AlertUtils.successAlert("添加成功");
-                } else {
-                    AlertUtils.errorAlert("添加失败");
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+            boolean flag = categoryService.saveOneCategory(UUID.randomUUID().toString(), name);
+            if (flag) {
+                // 新增成功
+                AlertUtils.successAlert("添加成功");
+            } else {
+                AlertUtils.errorAlert("添加失败");
             }
         });
     }
@@ -510,5 +525,175 @@ public class MainController {
         list.add(uploadPathProperties);
 
 
+    }
+
+    public void refreshAllTags(ActionEvent actionEvent) {
+        try {
+            System.out.println("正在手动刷新");
+            refreshTags(actionEvent);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void refreshTags(Event event) throws SQLException {
+        List<TagTableVO> list = new ArrayList<>();
+        List<TagEntity> allTags = tagService.getAllTags();
+        // 封装tagvo
+        for (TagEntity allTag : allTags) {
+            TagTableVO tagTableVO = new TagTableVO();
+            tagTableVO.setTagId(allTag.getTagId());
+            tagTableVO.setTagName(allTag.getTagName());
+            tagTableVO.setCreateTime(allTag.getCreateTime());
+            list.add(tagTableVO);
+        }
+        ObservableList<TagTableVO> data = FXCollections.observableList(list);
+        tagId.setCellValueFactory(cellData -> cellData.getValue().idProperty());
+        tagName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        tagCreateTime.setCellValueFactory(cellData -> cellData.getValue().createTimeProperty());
+        tagOperate.setCellFactory(createTagButtonCellFactory());
+        tagTableId.setItems(data);
+    }
+
+    private Callback<TableColumn<TagTableVO, String>, TableCell<TagTableVO, String>> createTagButtonCellFactory() {
+        return new Callback<>() {
+            @Override
+            public TableCell<TagTableVO, String> call(TableColumn<TagTableVO, String> param) {
+                return new TableCell<>() {
+                    private final Button button = new Button("删除");
+
+                    {
+                        button.setOnAction(event -> {
+                            TagTableVO dataItem = getTableView().getItems().get(getIndex());
+                            String id = dataItem.getTagId();
+                            System.out.println("Button clicked for id: " + id);
+                            // 根据uuid删除这个标签
+                            boolean flag = tagService.deleteById(id);
+                            if (flag) {
+                                AlertUtils.successAlert("删除成功!");
+                                try {
+                                    refreshTags(new ActionEvent());
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            } else {
+                                AlertUtils.errorAlert("删除失败!");
+                            }
+                        });
+                    }
+
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(button);
+                        }
+                    }
+                };
+            }
+        };
+    }
+
+    public void refreshCategory(Event event) {
+        List<CategoryTableVO> list = new ArrayList<>();
+        List<CategoryEntity> allTags = null;
+        try {
+            allTags = categoryService.getAllCateogies();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        // 封装tagvo
+        for (CategoryEntity allTag : allTags) {
+            CategoryTableVO categoryTableVO = new CategoryTableVO();
+            categoryTableVO.setCategoryId(allTag.getCategoryId());
+            categoryTableVO.setCategoryName(allTag.getCategoryName());
+            categoryTableVO.setCategoryCreateTime(allTag.getCategoryCreateTime());
+            list.add(categoryTableVO);
+        }
+        ObservableList<CategoryTableVO> data = FXCollections.observableList(list);
+        categoryId.setCellValueFactory(cellData -> cellData.getValue().idProperty());
+        categoryName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        categoryOperate.setCellFactory(createCategoryButtonCellFactory());
+        categoryTableId.setItems(data);
+    }
+
+    private Callback<TableColumn<CategoryTableVO, String>, TableCell<CategoryTableVO, String>> createCategoryButtonCellFactory() {
+        return new Callback<>() {
+            @Override
+            public TableCell<CategoryTableVO, String> call(TableColumn<CategoryTableVO, String> param) {
+                return new TableCell<>() {
+                    private final Button button = new Button("删除");
+
+                    {
+                        button.setOnAction(event -> {
+                            CategoryTableVO dataItem = getTableView().getItems().get(getIndex());
+                            String id = dataItem.getCategoryId();
+                            System.out.println("Button clicked for id: " + id);
+                            // 根据uuid删除这个标签
+                            boolean flag = categoryService.deleteById(id);
+                            if (flag) {
+                                AlertUtils.successAlert("删除成功!");
+                                refreshCategory(new ActionEvent());
+                            } else {
+                                AlertUtils.errorAlert("删除失败!");
+                            }
+                        });
+                    }
+
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(button);
+                        }
+                    }
+                };
+            }
+        };
+    }
+
+    public void addOneTagFromTable(ActionEvent actionEvent) {
+        addOneTag();
+        // 刷新列表
+        try {
+            refreshTags(actionEvent);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addOneCategoryFromTable(ActionEvent actionEvent) {
+        addOneCategory();
+        refreshCategory(actionEvent);
+    }
+
+    public void resetAll(ActionEvent actionEvent) {
+        this.file = null;
+        this.fileInfo.setText("请重新上传文件");
+        this.titleShow.setText("");
+        this.coverShow.setText("");
+        this.recommendShow.setText("");
+        this.commentShow.setText("");
+        this.tagShow.setText("");
+        this.categoriesShow.setText("");
+        this.locateShow.setText("");
+        this.keywordShow.setText("");
+
+        this.title.setText("");
+        this.coverText.setText("");
+        this.isRecommend.setValue(null);
+        this.isComment.setValue(null);
+        this.tagSelect.setValue(null);
+        this.categorySelect.setValue(null);
+        this.locateSelect.setValue(null);
+        this.keyword.setText(null);
+
+        this.chooseTags = new HashSet<>();
+        this.chooseCategory = new HashSet<>();
+        this.chooseLocates = new HashSet<>();
     }
 }

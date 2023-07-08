@@ -99,4 +99,29 @@ public class DaoServiceImpl implements DaoService {
         }
         return result;
     }
+
+    @Override
+    public ResultSet queryResultSet(String tableName, String condition) throws SQLException {
+        if (conn != null) {
+            String sql = "SELECT * FROM " + tableName + " WHERE " + condition;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } else {
+            System.out.println("conn is null");
+            return null;
+        }
+    }
+
+    @Override
+    public int delete(String tableName, String condition) throws SQLException {
+        if (conn != null) {
+            String sql = "DELETE FROM " + tableName + " WHERE " + condition;
+            Statement stmt = conn.createStatement();
+            return stmt.executeUpdate(sql);
+        }
+        return 0;
+    }
+
+
 }

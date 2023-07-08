@@ -1,5 +1,6 @@
 package com.yamon.service;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -25,6 +26,9 @@ public interface DaoService {
     void update(String tableName, String setField, String setValue, String conditionField, String conditionValue) throws SQLException;
 
     List<String> query(String tableName, String condition) throws SQLException;
+    ResultSet queryResultSet(String tableName, String condition) throws SQLException;
+
+    int delete(String tableName, String condition) throws SQLException;
 
 
 }
