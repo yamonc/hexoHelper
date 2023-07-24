@@ -10,7 +10,7 @@
 <?import javafx.scene.text.*?>
 <?import java.lang.String?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yamon.convert.MainController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yamon.convert.MainController">
   <tabs>
     <Tab text="Hexo转换器">
       <content>
@@ -52,12 +52,14 @@
                               <Label fx:id="keywordShow" layoutX="532.0" layoutY="179.0" />
                               <Label fx:id="coverShow" layoutX="95.0" layoutY="83.0" />
                               <Label fx:id="locateShow" layoutX="82.0" layoutY="186.0" />
+                              <Label fx:id="password" layoutX="24.0" layoutY="215.0" text="密码：" />
+                              <Label fx:id="passwordShow" layoutX="71.0" layoutY="215.0" />
                            </children>
                         </Pane>
                         <Separator prefHeight="25.0" prefWidth="983.0" />
-                        <Pane prefHeight="234.0" prefWidth="959.0">
+                        <Pane prefHeight="284.0" prefWidth="960.0">
                            <children>
-                              <ToolBar layoutX="370.0" layoutY="180.0" prefHeight="40.0" prefWidth="336.0">
+                              <ToolBar layoutX="320.0" layoutY="197.0" prefHeight="40.0" prefWidth="336.0">
                                  <items>
                                     <Button fx:id="fxUpload" mnemonicParsing="false" onAction="#upload" text="上传文件" />
                                     <Button fx:id="fxConvert" mnemonicParsing="false" onAction="#convert" text="转换格式" />
@@ -102,6 +104,9 @@
                               <Button fx:id="addCategories" layoutX="896.0" layoutY="91.0" mnemonicParsing="false" onAction="#addOneCategory" text="添加" />
                               <ComboBox fx:id="categorySelect" layoutX="673.0" layoutY="91.0" onShown="#getAllCategories" prefHeight="23.0" prefWidth="162.0" promptText="请选择..." />
                               <Button fx:id="btnSubmitLocate" layoutX="300.0" layoutY="126.0" mnemonicParsing="false" onAction="#submitLocate" text="确定" />
+                              <Label layoutX="62.0" layoutY="169.0" text="文章密码：" />
+                              <TextField fx:id="passwordText" layoutX="123.0" layoutY="165.0" />
+                              <Button fx:id="btnGenerateByDefaultPassword" layoutX="300.0" layoutY="165.0" mnemonicParsing="false" onAction="#useDefaultPassword" text="使用默认密码" />
                            </children>
                         </Pane>
                      </children>
@@ -122,7 +127,6 @@
                         <Label layoutX="19.0" layoutY="111.0" prefHeight="24.0" prefWidth="87.0" text="上传文件目录：" />
                         <TextField fx:id="workPath" layoutX="106.0" layoutY="52.0" promptText="请输入Hexo安装的目录" />
                         <TextField fx:id="uploadPath" layoutX="106.0" layoutY="112.0" promptText="请输入待转换文件的目录" />
-                        <Button layoutX="227.0" layoutY="172.0" mnemonicParsing="false" onAction="#saveSetting" text="保存" />
                         <Label layoutX="19.0" layoutY="14.0" prefHeight="20.0" prefWidth="69.0" text="目录设置">
                            <font>
                               <Font size="15.0" />
@@ -146,7 +150,21 @@
                            </font></Label>
                      </children>
                   </Pane>
-                  <Pane layoutY="250.0" prefHeight="325.0" prefWidth="1000.0" />
+                  <Pane layoutY="250.0" prefHeight="325.0" prefWidth="1000.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="102.0" text="文章密码设置">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="39.0" layoutY="88.0" prefHeight="24.0" prefWidth="107.0" text="密码框提示语：" />
+                        <TextField fx:id="passwordMessage" layoutX="165.0" layoutY="88.0" prefHeight="23.0" prefWidth="221.0" promptText="请输入密码框的提示语" />
+                        <Label layoutX="32.0" layoutY="129.0" prefHeight="24.0" prefWidth="104.0" text="密码错误提示语：" />
+                        <TextField fx:id="passwordWrong" layoutX="165.0" layoutY="130.0" prefHeight="23.0" prefWidth="224.0" promptText="请输入密码错误提示语" />
+                        <Button layoutX="245.0" layoutY="174.0" mnemonicParsing="false" onAction="#saveSetting" text="保存" />
+                        <Label layoutX="63.0" layoutY="54.0" prefHeight="24.0" prefWidth="68.0" text="默认密码：" />
+                        <TextField fx:id="settingPassword" layoutX="165.0" layoutY="55.0" prefHeight="23.0" prefWidth="221.0" promptText="请输入默认密码" />
+                     </children></Pane>
                </children></AnchorPane>
       </content>
     </Tab>

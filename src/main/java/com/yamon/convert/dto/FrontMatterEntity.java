@@ -66,6 +66,15 @@ public class FrontMatterEntity {
      */
     private String excerpt;
 
+    /**
+     * 以下都是密码的字段
+     */
+    private String passwordAbstract;
+    private String passwordMessage;
+    private String wrongPassMessage;
+    private String wrongHashMessage;
+    private String password;
+
     public String getTitle() {
         return title;
     }
@@ -176,5 +185,45 @@ public class FrontMatterEntity {
 
     public void setExcerpt(String excerpt) {
         this.excerpt = excerpt;
+    }
+
+    public String getPasswordAbstract() {
+        return passwordAbstract;
+    }
+
+    public void setPasswordAbstract(String passwordAbstract) {
+        this.passwordAbstract = passwordAbstract;
+    }
+
+    public String getPasswordMessage() {
+        return passwordMessage;
+    }
+
+    public void setPasswordMessage(String passwordMessage) {
+        this.passwordMessage = passwordMessage;
+    }
+
+    public String getWrongPassMessage() {
+        return wrongPassMessage;
+    }
+
+    public void setWrongPassMessage(String wrongPassMessage) {
+        this.wrongPassMessage = wrongPassMessage;
+    }
+
+    public String getWrongHashMessage() {
+        return wrongHashMessage;
+    }
+
+    public void setWrongHashMessage(String wrongHashMessage) {
+        this.wrongHashMessage = wrongHashMessage;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

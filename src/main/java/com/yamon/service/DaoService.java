@@ -30,5 +30,4 @@ public interface DaoService {
 
     int delete(String tableName, String condition) throws SQLException;
 
-
 }

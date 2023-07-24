@@ -13,7 +13,7 @@
         </library>
       </libraries>
     </data-source>
-    <data-source source="LOCAL" name="hexoHelper [2]" uuid="1e3317fa-9c2d-427b-b794-bcfc72f79e0c">
+    <data-source source="LOCAL" name="hexoHelper-local" uuid="1e3317fa-9c2d-427b-b794-bcfc72f79e0c">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

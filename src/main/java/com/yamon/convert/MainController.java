@@ -4,14 +4,8 @@ import com.yamon.convert.dto.FrontMatterEntity;
 import com.yamon.convert.dto.PropertiesEntity;
 import com.yamon.entity.CategoryEntity;
 import com.yamon.entity.TagEntity;
-import com.yamon.service.CategoryService;
-import com.yamon.service.DaoService;
-import com.yamon.service.MainService;
-import com.yamon.service.TagService;
-import com.yamon.service.impl.CategoryServiceImpl;
-import com.yamon.service.impl.DaoServiceImpl;
-import com.yamon.service.impl.MainServiceImpl;
-import com.yamon.service.impl.TagServiceImpl;
+import com.yamon.service.*;
+import com.yamon.service.impl.*;
 import com.yamon.utils.AlertUtils;
 import com.yamon.utils.CMDUtils;
 import com.yamon.vo.CategoryTableVO;
@@ -25,6 +19,7 @@ import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.sqlite.util.StringUtils;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -52,6 +47,12 @@ public class MainController {
     public TableColumn<CategoryTableVO, String> categoryName;
     public TableColumn<CategoryTableVO, String> categoryCreateTime;
     public TableColumn<CategoryTableVO, String> categoryOperate;
+    public TextField passwordMessage;
+    public TextField passwordWrong;
+    public TextField settingPassword;
+    public Button btnGenerateByDefaultPassword;
+    public TextField passwordText;
+    public Label passwordShow;
     Logger logger = Logger.getLogger("mainController");
 
     private static final String CREATE_TAG_SQL = "CREATE TABLE IF NOT EXISTS tags(id int not null primary key, name varchar(20) not null, create_time varchar(32) not null)";
@@ -99,6 +100,8 @@ public class MainController {
 
     private CategoryService categoryService = new CategoryServiceImpl();
 
+    private PropertiesService propertiesService = new PropertiesServiceImpl();
+
     public void initialize() {
         logger.info("执行初始化工作");
         // 先初始化表
@@ -106,6 +109,10 @@ public class MainController {
             logger.info("初始化所有表：标签表、分类表、位置表、配置表...");
             daoService.createTable(CREATE_TAG_SQL, CREATE_CATEGORY_SQL, CREATE_LOCATE_SQL, CREATE_PROPERTIES_SQL);
             logger.info("初始化成功...");
+            logger.info("开始初始化设置-密码内容");
+            if (!propertiesService.isKeyExist("message") && !propertiesService.isKeyExist("wrong_pass_message") && !propertiesService.isKeyExist("password")) {
+                propertiesService.initData();
+            }
         } catch (ClassNotFoundException | SQLException e) {
             logger.info("初始化失败...");
             throw new RuntimeException(e);
@@ -125,6 +132,19 @@ public class MainController {
             this.workPath.setText(wordPath);
             WORK_PATH = wordPath;
         }
+        String message = null;
+        String wrongMessage = null;
+        String passwordd = null;
+        try {
+            message = propertiesService.getValueByKey("message");
+            wrongMessage = propertiesService.getValueByKey("wrong_pass_message");
+            passwordd = propertiesService.getValueByKey("password");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        passwordMessage.setText(message);
+        passwordWrong.setText(wrongMessage);
+        settingPassword.setText(passwordd);
         title.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
                 // 在此处编写失去焦点事件的处理逻辑
@@ -187,7 +207,12 @@ public class MainController {
                 this.keywordShow.setText(this.keyword.getText());
             }
         });
-
+        passwordText.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                // 在此处编写失去焦点事件的处理逻辑
+                this.passwordShow.setText(this.passwordText.getText());
+            }
+        });
     }
 
     @FXML
@@ -340,6 +365,15 @@ public class MainController {
         frontMatterEntity.setDate(format);
         frontMatterEntity.setRecommend(Objects.equals(recommendText, "是") ? "true" : "false");
         frontMatterEntity.setLocate(locateText);
+        frontMatterEntity.setPassword(passwordShow.getText());
+        try {
+            frontMatterEntity.setPasswordAbstract(propertiesService.getValueByKey("abstract"));
+            frontMatterEntity.setPasswordMessage(propertiesService.getValueByKey("message"));
+            frontMatterEntity.setWrongPassMessage(propertiesService.getValueByKey("wrong_pass_message"));
+            frontMatterEntity.setWrongHashMessage(propertiesService.getValueByKey("wrong_hash_message"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         addContent(frontMatterEntity, filePath);
         System.out.println("转换完成...");
         AlertUtils.infoAlert("格式转换成功,请查看原文件。");
@@ -392,6 +426,11 @@ public class MainController {
         sb.append("cover: ").append(meta.getCover()).append("\n");
         sb.append("comment: ").append(meta.getComment()).append("\n");
         sb.append("keywords: ").append(meta.getKeywords()).append("\n");
+        sb.append("password: ").append(meta.getPassword()).append("\n");
+        sb.append("abstract: ").append(meta.getPasswordAbstract()).append("\n");
+        sb.append("message: ").append(meta.getPasswordMessage()).append("\n");
+        sb.append("wrong_pass_message: ").append(meta.getWrongPassMessage()).append("\n");
+        sb.append("wrong_hash_message: ").append(meta.getWrongHashMessage()).append("\n");
         sb.append(sp).append("\n");
         try {
             // 读取原始 Markdown 文件内容
@@ -523,7 +562,30 @@ public class MainController {
             throw new RuntimeException(e);
         }
         list.add(uploadPathProperties);
-
+        String settingPasswordText = settingPassword.getText();
+        String passwordMessageText = passwordMessage.getText();
+        String passwordWrongText = passwordWrong.getText();
+        if (Objects.nonNull(passwordMessageText)) {
+            try {
+                propertiesService.updateValueByKey("message", passwordMessageText);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (Objects.nonNull(passwordWrongText)) {
+            try {
+                propertiesService.updateValueByKey("wrong_pass_message", passwordWrongText);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (Objects.nonNull(settingPasswordText)) {
+            try {
+                propertiesService.updateValueByKey("password", settingPasswordText);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     }
 
@@ -695,5 +757,15 @@ public class MainController {
         this.chooseTags = new HashSet<>();
         this.chooseCategory = new HashSet<>();
         this.chooseLocates = new HashSet<>();
+    }
+
+    public void useDefaultPassword(ActionEvent actionEvent) {
+        try {
+            String password = propertiesService.getValueByKey("password");
+            passwordText.setText(password);
+            passwordShow.setText(password);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
