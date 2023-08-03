@@ -19,7 +19,6 @@ import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import org.sqlite.util.StringUtils;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

@@ -199,6 +199,7 @@
                 <includes>
                     <include>**/*.db</include>
                     <include>**/*.fxml</include>
+                    <include>**/*.xml</include>
                     <!-- 添加其他匹配的资源文件 -->
                 </includes>
             </resource>
