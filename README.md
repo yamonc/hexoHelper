@@ -1,35 +1,41 @@
-# Hexo文章转换器II
+---
+title: Hexo文章转换器III
+date: 2023-08-03 17:17:01
+tags: [Java, 工具]
+categories: [开源项目]
+recommend: true
+locate: [天津]
+cover: https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202308031551988.jpeg
+comment: 是
+keywords:
+password:
+abstract: 有东西被加密了, 请输入密码查看.
+message: 您好, 这里需要密码.
+wrong_pass_message: 抱歉, 这个密码看着不太对, 请再试试.
+wrong_hash_message: 抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.
 
-![a view of a beach and a body of water](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202306281711167.jpeg)
+---
 
-> Hexo系列文章：
+# Hexo文章转换器III
+
+![a person standing on top of a cliff](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202308031551988.jpeg)
+
+>Hexo系列文章：
 >
-> 1. [从0到1部署博客系统到GitHub Page（0成本）](https://yamonc.github.io/2023/06/13/%E4%BB%8E0%E5%88%B01%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E5%88%B0Github-Page/)
-> 2. [hexo如何修改主题？](https://yamonc.github.io/2023/06/13/hexo%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98/)
-> 3. [hexo-Acrylic主题集成twikoo评论](https://yamonc.github.io/2023/06/13/hexo-Acrylic%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90twikoo%E8%AF%84%E8%AE%BA/)
-> 4. [如何将JavaFX的java项目打包成exe格式](https://yamonc.github.io/2023/06/16/%E5%A6%82%E4%BD%95%E5%B0%86java%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85%E6%88%90exe%E6%A0%BC%E5%BC%8F/)
+>1. [从0到1部署博客系统到GitHub Page（0成本）](https://yamonc.github.io/2023/06/13/%E4%BB%8E0%E5%88%B01%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E5%88%B0Github-Page/)
+>2. [hexo如何修改主题？](https://yamonc.github.io/2023/06/13/hexo%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98/)
+>3. [hexo-Acrylic主题集成twikoo评论](https://yamonc.github.io/2023/06/13/hexo-Acrylic%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90twikoo%E8%AF%84%E8%AE%BA/)
+>4. [如何将JavaFX的java项目打包成exe格式](https://yamonc.github.io/2023/06/16/%E5%A6%82%E4%BD%95%E5%B0%86java%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85%E6%88%90exe%E6%A0%BC%E5%BC%8F/)
+>5. [Hexo文章转换器](https://yamonc.github.io/2023/06/19/02.%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/Hexo%E6%96%87%E7%AB%A0%E8%BD%AC%E6%8D%A2%E5%99%A8/)
+>6. [Hexo文章转换器II](https://yamonc.github.io/2023/06/28/02.%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/Hexo%E6%96%87%E7%AB%A0%E8%BD%AC%E6%8D%A2%E5%99%A8II/)
 
--------
-
-## 背景
-
-该工具可以帮助你在使用Hexo写博客的时候，将文章直接转换成为Hexo可识别并可展示在页面；
-
-每次在写博客的时候，都需要手动在文章的开头添加Front-Matter的信息：
-
-![image-20230619104358612](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202306281633297.png)
-
-感觉不太方便，所以想通过界面化的方式，将过程进行简化（要不，每次都手动在文章的开头写上---xxx---,太麻烦）。
-
-基于此，本文通过界面化的方式，将文章进行格式化，通过代码的方式自动在文章开头插入markdown可识别的字符串。
-
-------
+## 更新记录
 
 ⭐⭐⭐⭐V1.0.0更新日志
 
 第一版的Hexo文章转换器使用起来不太方便，所以在第一版的基础上进行了更新，主要是将标签和分类的信息保存到sqlite数据库中，不再用户每次都手动输入了。（初版的思路是，标题、 创建时间、位置等一些信息可以从后台直接获取，比如标题可以通过读取文章的第一行获取，然后将标题生成到原文中就行，不知道为什么打包成exe格式之前，标题都能从文章中提取出来，但是在exe中如果获取出来的标题永远都是乱码，各种尝试都无用，无奈，手动输入标题吧）
 
-⭐⭐⭐⭐⭐V1.1.0更新日志
+⭐⭐⭐⭐⭐V1.1.0更新日志-小版本更新
 
 V1.1.0版本在界面上进行了一系列的改动，优化了用户体验，主要体现在：
 
@@ -38,25 +44,45 @@ V1.1.0版本在界面上进行了一系列的改动，优化了用户体验，�
 3. 新增标签管理和分栏管理Tab页。在最顶端新增两个Tab页，分别用来对标签和分栏的新增和删除功能。
 4. 优化了大部分的代码，包括但不限于接口实现jdbc操作数据库功能，提高易用性和扩展性、新增表结构、合适的地方处理异常等等。
 
-## 示例
+⭐⭐⭐⭐⭐V2.0.0更新日志
 
-![image-20230628164814150](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202306281648185.png)
+新增输入密码才可查看文章。（解决因文章版权问题或者不想让别人查看指定文章）
+
+可自定义输入密码提示语、及密码错误提示语，设置自定义密码等功能。
+
+## 背景
+
+通常在使用Hexo写文章的时候，都需要将在Hexo文章的开头处，加上Front-Matter的必要信息，用于Hexo识别并提取出文章的meta信息。
+
+但是，每次写都不是特别方便，所以，使用界面化的方式来简化操作步骤，通过点击的方式对使用过程进行了简化。
+
+适用hexo主题为[Hexo Acrylic](https://next-docs.acrylic.org.cn/)，并且使用[hexo-blog-encrypt](https://github.com/D0n9X1n/hexo-blog-encrypt)对文章进行加密。
+
+## 示例
 
 使用该工具可以避免手动输入这些信息，而是通过界面化的方式进行配置：
 
-![image-20230628164828060](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202306281648109.png)
+![image-20230803160906642](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202308031609520.png)
 
-但是，**建议在使用之前进行两项的配置**：
+但是，**建议在使用之前进行三项的配置**，其中上传目录是必须的，**要不无法使用**
 
-![image-20230628164907063](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202306281649108.png)
+![image-20230803160919907](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202308031609948.png)
 
-工作目录：主要是基于这个目录，执行一系列指令：hexo clean、hexo g和hexo d等指令。
+管理标签界面：
 
-上传文件目录：在Hexo转换器Tab中，需要上传文件之后才能点转换，这里的位置就是点击后重定向的位置，换句话说，就是你平常文章经常放的位置，通常是_posts。
+![image-20230803160927878](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202308031609839.png)
 
-![image-20230628165125467](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202306281651512.png)
+分栏管理界面：
 
-关于Hexo转换器界面，主要就是讲解这个页面是干什么用的，解决了什么问题。
+![image-20230803160932865](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202308031609583.png)
+
+关于我界面：
+
+![image-20230803160938395](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202308031609976.png)
+
+转换之后的界面：
+
+![image-20230803160838891](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202308031610916.png)
 
 ## 技术说明
 
@@ -72,7 +98,7 @@ Java17（开发语言）、Java FX（Java界面工具，类似于java8的swing�
 
 下载好之后，解压缩，解压缩之后，需要注意的是，db文件夹要和hexoHelper.exe是同级目录，db文件夹中是sqlite的数据库，运行的时候需要找到db的数据库才行。最终文件的位置关系：
 
-![image-20230628165640833](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202306281656872.png)
+![image-20230628165640833](D:\blog\source\_posts\02.开源项目\assets\202306281656872.png)
 
 开始运行，会出现[示例]中的界面。
 
@@ -112,13 +138,15 @@ Java17（开发语言）、Java FX（Java界面工具，类似于java8的swing�
 
 ## 使用流程说明
 
-![image-20230619105823619](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202306281633232.png)
+![image-20230619105823619](https://markdown-image-bed.oss-cn-beijing.aliyuncs.com/202308031613532.png)
 
 ## 待优化问题
 
-1. 用户使用优化。
-2. 标签和分类的操作业务流程有问题。无法删除标签和分类。考虑在设置中体现。
-3. 显示优化，如果cover或者其他字段太长的话，会影响到字体显示。
+现在主要存在三个核心问题暂时没有解决：
 
+第一，使用sqlite作为持久化数据库，但是sqlite文件必须在外部挂载，无法将sqlite打到jar包中，并转成exe文件。
 
+第二，出错没有日志可查，可以将日志输出成文件，并保存在客户端。
+
+第三，利用公私钥的方式对密码进行加密，并输入在文章的Front-Matter上。
 
